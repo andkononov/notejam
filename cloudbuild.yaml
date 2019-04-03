@@ -2,8 +2,11 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'docker/Dockerfile', '.']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/notejam-test/notejam']
+  args: ['push', 'gcr.io/$PROJECT_ID/notejam']
+  images:
+- 'gcr.io/$PROJECT_ID/notejam'
+
 - name: 'gcr.io/cloud-builders/kubectl'
-  args: ['set', 'image', 'deployment/notejam', 'my-container=gcr.io/notejam-test/notejam']
+  args: ['set', 'image', 'deployment/notejam', 'my-container=gcr.io/$PROJECT_ID/notejam']
 
 
